@@ -172,17 +172,17 @@ store_data, 'angleP', data ={x:angl[*,0], y:angl[*,13], labels:['P'], labflag:1 
 store_data, 'angleO', data ={x:angl[*,0], y:angl[*,14], labels:['O'], labflag:1 }
 store_data, 'angleO2', data ={x:angl[*,0], y:angl[*,15], labels:['O2'], labflag:1 }
 ;----------------------------------------------
-
-store_data, 'Ball', data=['B','Bx','By','Bz']
 store_data, 'n', data=['np', 'no', 'no2', 'nh/np']
+store_data, 'Ball', data=['B','mag.OB_B_X','mag.OB_B_Y','mag.OB_B_Z']
 store_data, 'V', data=['Vp', 'Vo', 'Vo2']
 store_data, 'E', data=['Ek', 'Eb', 'Eth']
 store_data, 'angle', data=['angleP','angleO','angleO2']
-options, 'Ball', colors=['o','b','r', 'g'],labels=['|B|','Bx','By','Bz'], yrange=[-20, 20],ytitle='B, [nT]', xticklen=1, yticklen=1
+options, 'Ball', colors=['o','b','r', 'g'],labels=['|B|','Bx','By','Bz'], labflag=2, yrange=[-20, 20],ytitle='B, [nT]', xticklen=1, yticklen=1
 options, 'n', colors=['o','b','r', 'g'],labels=['P','O','O2','nh/np'], labflag=2, yrange=[0.01, 1000],ytitle='density, [cm-3]', ylog=1, xticklen=1, yticklen=1
 options, 'V', colors=['o','b','r'],labels=['P','O','O2'], labflag=2, yrange=[1, 1000],ytitle='velocity, [km/s]', ylog=1, xticklen=1, yticklen=1
 options, 'E', colors=['o','b','r'],labels=['nmV^2/2','B^2/((8pi)','nkT'], labflag=2, yrange=[10, 10000],ytitle='[eV*cm-3]', ylog=1 , xticklen=1, yticklen=1
 options, 'angle',colors=['o','b','r'],legend=['p','O','O2'], labflag=2, yrange=[0, 180],ytitle='V-B angle, [grad]', xticklen=1, yticklen=1
 tplot_options, title = t3
-tplot,['spectrP','spectrO','spectrO2','Ball','n','V','E', 'angle']       
+tplot,['spectrP','spectrO','spectrO2','Ball','n','V','E', 'angle']  
+stop     
 end
