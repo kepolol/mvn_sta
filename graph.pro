@@ -94,6 +94,7 @@ calc, "'E3'='no2'*(32*1.66053904*10^(-27))*('Vo2'^2)*(6.24151*10^(24))/2"
 ;----------------------------------------------
 calc,"'nh'='no'+'no2'"
 calc,"'nh/np'='nh'/'np'"
+calc,"'nall'='np'+'no'+'no2'"
 ;----------------------------------------------
 ;сравнение для мага
 ;----------------------------------------------
@@ -172,17 +173,45 @@ store_data, 'angleP', data ={x:angl[*,0], y:angl[*,13], labels:['P'], labflag:1 
 store_data, 'angleO', data ={x:angl[*,0], y:angl[*,14], labels:['O'], labflag:1 }
 store_data, 'angleO2', data ={x:angl[*,0], y:angl[*,15], labels:['O2'], labflag:1 }
 ;----------------------------------------------
+mvn_swe_load_l2, /all
+mvn_swe_sumplot
+mvn_swe_n1d
+get_data, 'mvn_swe_spec_dens', tim, dswe
+get_data, 'nall', tim1, nall
+swe=dblarr(2, n_elements(tim))
+swe[0, *] = tim
+swe[1, *] = dswe
+swe1=dblarr(3, n_elements(ty))
+swe1[0, *] = ty
+swe1[2, *] = nall
+if (ty[0] - swe[0,0]) < 2 then begin
+  for r = 0, n_elements(ty)-1 do begin
+   e = 0 + r*2
+   swe1[1,r] = (swe[1, e]+swe[1, (e+1)])/2  
+  endfor
+endif else begin
+  if (ty[0] - swe[0,1]) < 2 then begin
+    for r = 0, n_elements(ty)-1 do begin
+      e = 1 + r*2
+      swe1[1,r] = (swe[1, e]+swe[1, (e+1)])/2
+    endfor
+  endif
+endelse
+swe1 = transpose(swe1)
+q=plot(swe1[*, 2],swe1[*, 1], 'r*')
+;----------------------------------------------
 store_data, 'n', data=['np', 'no', 'no2', 'nh/np']
 store_data, 'Ball', data=['B','mag.OB_B_X','mag.OB_B_Y','mag.OB_B_Z']
 store_data, 'V', data=['Vp', 'Vo', 'Vo2']
 store_data, 'E', data=['Ek', 'Eb', 'Eth']
 store_data, 'angle', data=['angleP','angleO','angleO2']
+
 options, 'Ball', colors=['o','b','r', 'g'],labels=['|B|','Bx','By','Bz'], labflag=2, yrange=[-20, 20],ytitle='B, [nT]', xticklen=1, yticklen=1
 options, 'n', colors=['o','b','r', 'g'],labels=['P','O','O2','nh/np'], labflag=2, yrange=[0.01, 1000],ytitle='density, [cm-3]', ylog=1, xticklen=1, yticklen=1
 options, 'V', colors=['o','b','r'],labels=['P','O','O2'], labflag=2, yrange=[1, 1000],ytitle='velocity, [km/s]', ylog=1, xticklen=1, yticklen=1
 options, 'E', colors=['o','b','r'],labels=['nmV^2/2','B^2/((8pi)','nkT'], labflag=2, yrange=[10, 10000],ytitle='[eV*cm-3]', ylog=1 , xticklen=1, yticklen=1
 options, 'angle',colors=['o','b','r'],legend=['p','O','O2'], labflag=2, yrange=[0, 180],ytitle='V-B angle, [grad]', xticklen=1, yticklen=1
 tplot_options, title = t3
-tplot,['spectrP','spectrO','spectrO2','Ball','n','V','E', 'angle']  
-stop     
+tplot,['spectrP','spectrO','spectrO2','Ball','n','V','E', 'angle','swe_a4','mvn_swe_spec_dens']
+mvn_swe_slice2d_snap  
 end
