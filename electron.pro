@@ -5,6 +5,6 @@ mvn_swe_load_l2, /all
 mvn_swe_sumplot
 mvn_swe_n1d
 tplot,['swe_a4','mvn_swe_spec_dens']
-mvn_swe_slice2d_snap, /mso
-tplot_names
+;mvn_swe_slice2d_snap, /mso
+;tplot_names
 end
