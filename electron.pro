@@ -8,3 +8,4 @@ tplot,['swe_a4','mvn_swe_spec_dens']
 ;mvn_swe_slice2d_snap, /mso
 ;tplot_names
 end
+
