@@ -16,8 +16,8 @@ pro flux
   a1[3,*]=xyz[2,*]
   
   ;a2
-  get_4dt, 'n_4d', 'mvn_sta_get_d1', mass=[0,3]
-  get_4dt, 'v_4d', 'mvn_sta_get_d1', mass=[0,3]
+  get_4dt, 'n_4d', 'mvn_sta_get_d1', mass=[0.5,1.4]
+  get_4dt, 'v_4d', 'mvn_sta_get_d1', mass=[0.5,1.4]
   split_vec, 'v_4d_mvn_sta_get_d1'
   calc, "'np'='n_4d_mvn_sta_get_d1'"
   calc, "'Vp'=sqrt('v_4d_mvn_sta_get_d1_x'^2+'v_4d_mvn_sta_get_d1_y'^2+'v_4d_mvn_sta_get_d1_z'^2)"
@@ -74,8 +74,8 @@ pro flux
   calc, "'intp'='fp'*'dh'*10^5"
   get_data,'intp', t, fp
 ;  ;a3
-  get_4dt, 'n_4d', 'mvn_sta_get_d1', mass=[15,18]
-  get_4dt, 'v_4d', 'mvn_sta_get_d1', mass=[15,18]
+  get_4dt, 'n_4d', 'mvn_sta_get_d1', mass=[16,17.5]
+  get_4dt, 'v_4d', 'mvn_sta_get_d1', mass=[16,17.5]
   split_vec, 'v_4d_mvn_sta_get_d1'
   calc, "'no'='n_4d_mvn_sta_get_d1'"
   calc,"'Vo'=sqrt('v_4d_mvn_sta_get_d1_x'^2+'v_4d_mvn_sta_get_d1_y'^2+'v_4d_mvn_sta_get_d1_z'^2)"
@@ -114,8 +114,8 @@ pro flux
   calc, "'into'='fo'*'dh'*10^5"
   get_data,'into', t, fo
 ; ;a4
-  get_4dt, 'n_4d', 'mvn_sta_get_d1', mass=[31,33]
-  get_4dt, 'v_4d', 'mvn_sta_get_d1', mass=[31,33]
+  get_4dt, 'n_4d', 'mvn_sta_get_d1', mass=[31,32]
+  get_4dt, 'v_4d', 'mvn_sta_get_d1', mass=[31,32]
   split_vec, 'v_4d_mvn_sta_get_d1'
   calc, "'no2'='n_4d_mvn_sta_get_d1'"
   calc,"'Vo2'=sqrt('v_4d_mvn_sta_get_d1_x'^2+'v_4d_mvn_sta_get_d1_y'^2+'v_4d_mvn_sta_get_d1_z'^2)"
